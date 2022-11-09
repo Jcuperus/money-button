@@ -10,44 +10,61 @@
     <body>
         <div class="main-wrapper">
             <h1>How many rolls would you last?</h1>
-            <p>You have a button that gives you $5000 for every time you press it but there is a 1% chance you die instantly. How much money would you make before kicking the bucket?</p>
+            <p>You have a button that gives you $5000 for every time you press it but there's a 1% chance you die instantly. How much money would you make before kicking the bucket?</p>
 
             <div class="money-button-wrapper">
                 <button id="money-button">roll</button>
             </div>
 
-            <table id="roll-history">
-                <tbody>
-                    <tr>
-                        <td colspan="2" class="placeholder">no rolls</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-wrapper">
+                <table id="roll-history">
+                    <tbody>
+                        <tr>
+                            <td colspan="2" class="placeholder">no rolls</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             
             <h2>Stats</h2>
-            <table class="stats">
-                <thead>
-                    <tr>
-                        <th>Total rolls</th>
-                        <th>Median rolls</th>
-                        <th>Avg. rolls</th>
-                        <th>Total money</th>
-                        <th>Median money</th>
-                        <th>Avg. money</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td id="total-rolls">0</td>
-                        <td id="median-rolls">0</td>
-                        <td id="average-rolls">0</td>
-                        <td id="total-money">$0</td>
-                        <td id="median-money">$0</td>
-                        <td id="average-money">$0</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="graph-wrapper">
+                <canvas id="roll-graph" width="800", height="500"></canvas>
+            </div>
+            <div class="stat-grid">
+                <div>
+                    <p>Total rolls</p>
+                    <p id="total-rolls">0</p>
+                </div>
+                <div>
+                    <p>Median rolls</p>
+                    <p id="median-rolls">0</p>
+                </div>
+                <div>
+                    <p>Average rolls</p>
+                    <p id="average-rolls">0</p>
+                </div>
+                <div>
+                    <p>Total money</p>
+                    <p id="total-money">$0</p>
+                </div>
+                <div>
+                    <p>Median money</p>
+                    <p id="median-money">$0</p>
+                </div>
+                <div>
+                    <p>Average money</p>
+                    <p id="average-money">$0</p>
+                </div>
+            </div>
+
+            <h2>About</h2>
+            <p>
+                This page is based on a question that was submitted to the <a href="https://www.pickaxe.uk/zerodegrees">Zero Degrees</a> podcast. 
+                After hearing the hosts' <i>expert mathematical analysis</i> I knew I had to make this little page to get an idea for what the actual chances are of making a lot of money.
+            </p>
+            <p class="credits">By <a href="https://www.twitch.tv/makeshiftowl">@makeshiftowl</a> on twitch</p>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="main.js"></script>
     </body>
 </html>

@@ -9,6 +9,26 @@ const medianMoneyText = document.getElementById('median-money');
 
 const moneyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
 
+const config = {
+    type: 'bar',
+    data: {
+        datasets: [{
+            data: [10, 20, 30],
+            backgroundColor: '#9e0027',
+            label: 'rolls'
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+};
+
+const rollGraph = new Chart(document.getElementById('roll-graph'), config);
+
 const moneyPerRoll = 5000;
 const rollDelayMs = 20;
 
@@ -23,8 +43,6 @@ function randomRange(min, max) {
 function median(numbers) {
     numbers = numbers.sort();
     const middleIndex = Math.floor((numbers.length - 1) / 2);
-    
-    console.log(middleIndex);
 
     if (numbers.length % 2 != 0) {
         return numbers[middleIndex];
@@ -57,6 +75,29 @@ function updateStats() {
     averageMoneyText.innerText = moneyFormatter.format(averageMoney);
 }
 
+function updateGraph() {
+    const maxRoll = rollHistory.reduce((previousValue, currentValue) => currentValue > previousValue ? currentValue : previousValue);
+    console.log(maxRoll);
+
+    const rollCounts = {};
+
+    for (let roll of rollHistory) {
+        if (!(roll in rollCounts)) rollCounts[roll] = 0;
+        
+        rollCounts[roll]++;
+    }
+
+    rollGraph.config.data.datasets[0].data = rollCounts;
+    rollGraph.update();
+}
+
+function multiRoll() {
+    for (let i = 0; i < 100; i++) {
+        roll();
+    }
+}
+
+
 async function roll() {
     if (isFirstRoll) {
         isFirstRoll = false;
@@ -87,6 +128,7 @@ async function roll() {
 
     rollHistory.push(rollAmount);
     updateStats();
+    updateGraph();
 }
 
 moneyButton.addEventListener('click', roll);

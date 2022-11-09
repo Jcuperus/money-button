@@ -2,6 +2,7 @@
     --background-primary: #1b1b1b;
     --background-secondary: #343434;
     --text-primary: #ffffff;
+    --text-link: #007acc;
     --money-button: #9e0027;
     --money-button-hover: #7a001f;
     --money-button-active: #5e0017;
@@ -35,9 +36,16 @@ p {
     margin: 0;
 }
 
+a {
+    color: var(--text-link);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 table {
-    background-color: var(--background-secondary);
-    border-radius: 1rem;
     table-layout: fixed;
     width: 100%;
 }
@@ -54,7 +62,7 @@ table {
 .money-button-wrapper {
     display: flex;
     justify-content: center;
-    margin: 1rem 0;
+    margin: 2rem 0;
 }
 
 button#money-button {
@@ -73,4 +81,33 @@ button#money-button:hover {
 
 button#money-button:active {
     background-color: var(--money-button-active);
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr));
+    gap: 1rem;
+}
+
+.stat-grid > div {
+    padding: 1rem;
+    background-color: var(--background-secondary);
+    border-radius: 1rem;
+}
+
+.credits {
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+.graph-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.table-wrapper {
+    max-height: 50rem;
+    overflow-y: scroll;
+    background-color: var(--background-secondary);
+    border-radius: 1rem;
 }
