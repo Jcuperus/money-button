@@ -111,3 +111,9 @@ button#money-button:active {
     background-color: var(--background-secondary);
     border-radius: 1rem;
 }
+
+.money-button-config {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}

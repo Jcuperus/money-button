@@ -1,4 +1,7 @@
 const moneyButton = document.getElementById('money-button');
+const multiRollCheck = document.getElementById('multiroll');
+const rollAmountInput = document.getElementById('roll-amount');
+const rollAmountLabel = document.querySelector('label[for=\'roll-amount\']');
 const rollHistoryTable = document.querySelector('#roll-history > tbody');
 const totalRollText = document.getElementById('total-rolls');
 const averageRollText = document.getElementById('average-rolls');
@@ -13,9 +16,9 @@ const config = {
     type: 'bar',
     data: {
         datasets: [{
-            data: [10, 20, 30],
+            data: [],
             backgroundColor: '#9e0027',
-            label: 'rolls'
+            label: 'Roll distribution'
         }]
     },
     options: {
@@ -35,6 +38,7 @@ const rollDelayMs = 20;
 const rollHistory = [];
 
 let isFirstRoll = true;
+let isMultiRoll = false;
 
 function randomRange(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
@@ -77,7 +81,6 @@ function updateStats() {
 
 function updateGraph() {
     const maxRoll = rollHistory.reduce((previousValue, currentValue) => currentValue > previousValue ? currentValue : previousValue);
-    console.log(maxRoll);
 
     const rollCounts = {};
 
@@ -97,6 +100,15 @@ function multiRoll() {
     }
 }
 
+function onRollClicked() {
+    let rollAmount = 1;
+
+    if (isMultiRoll && rollAmountInput.value >= 1) rollAmount = rollAmountInput.value;
+
+    for (let i = 0; i < rollAmount; i++) {
+        roll();
+    }
+}
 
 async function roll() {
     if (isFirstRoll) {
@@ -131,4 +143,12 @@ async function roll() {
     updateGraph();
 }
 
-moneyButton.addEventListener('click', roll);
+function toggleMultiroll(event) {
+    isMultiRoll = multiRollCheck.checked;
+    rollAmountInput.hidden = !isMultiRoll;
+    rollAmountLabel.hidden = !isMultiRoll;
+}
+
+moneyButton.addEventListener('click', onRollClicked);
+multiRollCheck.addEventListener('change', toggleMultiroll);
+toggleMultiroll();

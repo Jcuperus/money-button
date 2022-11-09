@@ -16,6 +16,14 @@
                 <button id="money-button">roll</button>
             </div>
 
+            <div class="money-button-config">
+                <label for="multiroll">Multiroll</label>
+                <input type="checkbox" name="multiroll" id="multiroll">
+
+                <label for="roll-amount">Roll amount</label>
+                <input type="number" name="roll-amount" id="roll-amount" value="1" min="1" max="5000">
+            </div>
+
             <div class="table-wrapper">
                 <table id="roll-history">
                     <tbody>
@@ -62,7 +70,7 @@
                 This page is based on a question that was submitted to the <a href="https://www.pickaxe.uk/zerodegrees">Zero Degrees</a> podcast. 
                 After hearing the hosts' <i>expert mathematical analysis</i> I knew I had to make this little page to get an idea for what the actual chances are of making a lot of money.
             </p>
-            <p class="credits">By <a href="https://www.twitch.tv/makeshiftowl">@makeshiftowl</a> on twitch</p>
+            <p class="credits">By <a href="https://www.twitch.tv/makeshiftowl">@makeshiftowl</a></p>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="main.js"></script>
