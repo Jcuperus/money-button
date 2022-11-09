@@ -1,0 +1,76 @@
+:root {
+    --background-primary: #1b1b1b;
+    --background-secondary: #343434;
+    --text-primary: #ffffff;
+    --money-button: #9e0027;
+    --money-button-hover: #7a001f;
+    --money-button-active: #5e0017;
+    --border-primary: #858585;
+    --max-width: 1000px;
+}
+
+body {
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+    margin: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1 {
+    font-size: 3rem;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2rem;
+    text-align: center;
+}
+
+p, button, table {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+p {
+    margin: 0;
+}
+
+table {
+    background-color: var(--background-secondary);
+    border-radius: 1rem;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.main-wrapper {
+    display: grid;
+    margin: 2rem auto;
+    max-width: var(--max-width);
+    padding: 1rem;
+    border: 1px solid var(--border-primary);
+    border-radius: 1rem;
+}
+
+.money-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+button#money-button {
+    height: 200px;
+    width: 200px;
+    border-radius: 100%;
+    border: 0px solid var(--border-primary);
+    background-color: var(--money-button);
+    color: var(--text-primary);
+}
+
+button#money-button:hover {
+    background-color: var(--money-button-hover);
+    cursor: pointer;
+}
+
+button#money-button:active {
+    background-color: var(--money-button-active);
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Money button roller</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="main-wrapper">
+            <h1>How many rolls would you last?</h1>
+            <p>You have a button that gives you $5000 for every time you press it but there is a 1% chance you die instantly. How much money would you make before kicking the bucket?</p>
+
+            <div class="money-button-wrapper">
+                <button id="money-button">roll</button>
+            </div>
+
+            <table id="roll-history">
+                <tbody>
+                    <tr>
+                        <td colspan="2" class="placeholder">no rolls</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>Stats</h2>
+            <table class="stats">
+                <thead>
+                    <tr>
+                        <th>Total rolls</th>
+                        <th>Median rolls</th>
+                        <th>Avg. rolls</th>
+                        <th>Total money</th>
+                        <th>Median money</th>
+                        <th>Avg. money</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="total-rolls">0</td>
+                        <td id="median-rolls">0</td>
+                        <td id="average-rolls">0</td>
+                        <td id="total-money">$0</td>
+                        <td id="median-money">$0</td>
+                        <td id="average-money">$0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script src="main.js"></script>
+    </body>
+</html>
