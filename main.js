@@ -1,7 +1,7 @@
 const moneyButton = document.getElementById('money-button');
 const multiRollCheck = document.getElementById('multiroll');
+const rollAmountContainer = document.getElementById('roll-amount-container');
 const rollAmountInput = document.getElementById('roll-amount');
-const rollAmountLabel = document.querySelector('label[for=\'roll-amount\']');
 const rollHistoryTable = document.querySelector('#roll-history > tbody');
 const totalRollText = document.getElementById('total-rolls');
 const averageRollText = document.getElementById('average-rolls');
@@ -18,13 +18,20 @@ const config = {
         datasets: [{
             data: [],
             backgroundColor: '#9e0027',
-            label: 'Roll distribution'
+            label: 'Amount of clicks'
         }]
     },
     options: {
         scales: {
+            x: {
+                beginAtZero: true,
+                display: true,
+                text: 'amount'
+            },
             y: {
-                beginAtZero: true
+                beginAtZero: true,
+                display: true,
+                text: 'rolls'
             }
         }
     }
@@ -80,8 +87,6 @@ function updateStats() {
 }
 
 function updateGraph() {
-    const maxRoll = rollHistory.reduce((previousValue, currentValue) => currentValue > previousValue ? currentValue : previousValue);
-
     const rollCounts = {};
 
     for (let roll of rollHistory) {
@@ -94,23 +99,25 @@ function updateGraph() {
     rollGraph.update();
 }
 
-function multiRoll() {
-    for (let i = 0; i < 100; i++) {
-        roll();
-    }
+function updateRollInfo(counterCol, moneyCol, rollAmount) {
+    counterCol.innerText = `${rollAmount} ${rollAmount == 1 ? 'click' : 'clicks'}`;
+    moneyCol.innerText = formatMoney(rollAmount * moneyPerRoll);
 }
 
-function onRollClicked() {
+async function onRollClicked() {
     let rollAmount = 1;
 
     if (isMultiRoll && rollAmountInput.value >= 1) rollAmount = rollAmountInput.value;
 
     for (let i = 0; i < rollAmount; i++) {
-        roll();
+        await roll(!isMultiRoll);
     }
+
+    updateStats();
+    updateGraph();
 }
 
-async function roll() {
+async function roll(playAnimation = true) {
     if (isFirstRoll) {
         isFirstRoll = false;
         rollHistoryTable.getElementsByClassName('placeholder')[0].remove();
@@ -121,32 +128,32 @@ async function roll() {
     const rollRow = document.createElement('tr');
     const counterCol = document.createElement('td');
     const moneyCol = document.createElement('td');
-    
-    counterCol.innerText = `${rollAmount} ${rollAmount == 1 ? 'roll' : 'rolls'}`;
-    moneyCol.innerText = formatMoney(rollAmount * moneyPerRoll);
 
     rollRow.appendChild(counterCol);
     rollRow.appendChild(moneyCol);
     rollHistoryTable.prepend(rollRow);
     
     while(randomRange(0, 100) !== 0) {
-        await sleep(rollDelayMs);
-        
         rollAmount++;
 
-        counterCol.innerText = `${rollAmount} ${rollAmount == 1 ? 'roll' : 'rolls'}`;
-        moneyCol.innerText = formatMoney(rollAmount * moneyPerRoll);
+        if (playAnimation) {
+            await sleep(rollDelayMs);
+
+            updateRollInfo(counterCol, moneyCol, rollAmount);
+        }
     }
 
+    updateRollInfo(counterCol, moneyCol, rollAmount);
+
     rollHistory.push(rollAmount);
-    updateStats();
-    updateGraph();
+    // updateStats();
+    // updateGraph();
 }
 
-function toggleMultiroll(event) {
+function toggleMultiroll() {
     isMultiRoll = multiRollCheck.checked;
-    rollAmountInput.hidden = !isMultiRoll;
-    rollAmountLabel.hidden = !isMultiRoll;
+    // rollAmountInput.hidden = !isMultiRoll;
+    rollAmountContainer.hidden = !isMultiRoll;
 }
 
 moneyButton.addEventListener('click', onRollClicked);

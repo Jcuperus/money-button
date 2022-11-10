@@ -41,6 +41,14 @@ a {
     text-decoration: none;
 }
 
+/* input ~ label {
+    margin-left: 2rem;
+} */
+
+input {
+    margin: 0 2rem 0 0.5rem;
+}
+
 a:hover {
     text-decoration: underline;
 }
@@ -101,8 +109,11 @@ button#money-button:active {
 }
 
 .graph-wrapper {
+    position: relative;
     display: flex;
-    justify-content: center;
+    justify-self: center;
+    width: min(95vw, 1000px);
+    margin-bottom: 1rem;
 }
 
 .table-wrapper {

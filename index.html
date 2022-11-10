@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Money button roller</title>
+        <title>Magic money button</title>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> 
@@ -9,26 +11,30 @@
     </head>
     <body>
         <div class="main-wrapper">
-            <h1>How many rolls would you last?</h1>
-            <p>You have a button that gives you $5000 for every time you press it but there's a 1% chance you die instantly. How much money would you make before kicking the bucket?</p>
+            <h1>How many times can you press the button?</h1>
+            <p>You have a button that gives you $5000 for every time you press it but there's a 1% chance you die instantly. How much money would you make before dying?</p>
 
             <div class="money-button-wrapper">
-                <button id="money-button">roll</button>
+                <button id="money-button">click</button>
             </div>
 
             <div class="money-button-config">
-                <label for="multiroll">Multiroll</label>
+                <label for="multiroll">Multiclick</label>
                 <input type="checkbox" name="multiroll" id="multiroll">
 
-                <label for="roll-amount">Roll amount</label>
-                <input type="number" name="roll-amount" id="roll-amount" value="1" min="1" max="5000">
+                <span id="roll-amount-container">
+                    <label for="roll-amount">Button press amount</label>
+                    <input type="number" name="roll-amount" id="roll-amount" value="1">
+                    <span>Warning: numbers above 10k can cause browser lag</label>
+                </span>
+                
             </div>
 
             <div class="table-wrapper">
                 <table id="roll-history">
                     <tbody>
                         <tr>
-                            <td colspan="2" class="placeholder">no rolls</td>
+                            <td colspan="2" class="placeholder">no data</td>
                         </tr>
                     </tbody>
                 </table>
@@ -36,19 +42,19 @@
             
             <h2>Stats</h2>
             <div class="graph-wrapper">
-                <canvas id="roll-graph" width="800", height="500"></canvas>
+                <canvas id="roll-graph"></canvas>
             </div>
             <div class="stat-grid">
                 <div>
-                    <p>Total rolls</p>
+                    <p>Total clicks</p>
                     <p id="total-rolls">0</p>
                 </div>
                 <div>
-                    <p>Median rolls</p>
+                    <p>Median clicks</p>
                     <p id="median-rolls">0</p>
                 </div>
                 <div>
-                    <p>Average rolls</p>
+                    <p>Average clicks</p>
                     <p id="average-rolls">0</p>
                 </div>
                 <div>
