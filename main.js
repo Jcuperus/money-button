@@ -146,13 +146,10 @@ async function roll(playAnimation = true) {
     updateRollInfo(counterCol, moneyCol, rollAmount);
 
     rollHistory.push(rollAmount);
-    // updateStats();
-    // updateGraph();
 }
 
 function toggleMultiroll() {
     isMultiRoll = multiRollCheck.checked;
-    // rollAmountInput.hidden = !isMultiRoll;
     rollAmountContainer.hidden = !isMultiRoll;
 }
 
